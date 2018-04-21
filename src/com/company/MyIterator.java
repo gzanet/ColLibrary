@@ -4,4 +4,6 @@ public interface MyIterator<T> {
     T getNext();
 
     boolean hasNext();
+
+    boolean remove();
 }
