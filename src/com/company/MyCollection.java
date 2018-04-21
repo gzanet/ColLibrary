@@ -1,4 +1,4 @@
 package com.company;
 
-public interface MyCollection {
+public interface MyCollection<T>{
 }
