@@ -1,18 +1,17 @@
 package com.company;
 
-import java.io.InvalidClassException;
+import com.company.myFunctions.MyConsumer;
 
 public interface MyIterable<T> {
 
-    MyIterator<T> getIterator();
+    public MyIterator<T> getIterator();
 
-    // applica la funzione a ciascun elemento dell'Iterable, se la funzione non è valida lancia un eccezione
-    /*
-    default void applyToEach(MyFunction<? super T> f){
+    //accepts a single input argument and returns no result.
+    public default void ForEachElement(MyConsumer<? super T> f){
         MyIterator<T> it = getIterator();
         while( it.hasNext() )
-            f.apply(this);
+            f.consume( it.getNext() );
     }
-    */
+
 
 }

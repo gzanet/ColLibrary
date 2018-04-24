@@ -1,5 +1,8 @@
 package com.company;
 
+import com.company.myExceptions.InvalidArgumentException;
+import com.company.myExceptions.NotFoundException;
+
 public interface MyList<T> extends MyCollection<T> {
 
     void insertAt(int position, T elem);
@@ -28,7 +31,5 @@ public interface MyList<T> extends MyCollection<T> {
     void removeAt(int position) throws NotFoundException;
 
     T getHead() throws NotFoundException;
-
-
 
 }
