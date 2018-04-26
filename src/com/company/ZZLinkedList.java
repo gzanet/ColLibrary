@@ -1,7 +1,5 @@
 package com.company;
 
-import com.company.ZZExceptions.ZZNotFoundException;
-
 public abstract class ZZLinkedList<T> implements ZZList<T> {
     /*
         MyNode<T> head;
@@ -39,7 +37,7 @@ public abstract class ZZLinkedList<T> implements ZZList<T> {
     }
 
     @Override
-    public MyIterator<T> getIterator() {
+    public ZZIterator<T> getIterator() {
         return null;
     }
 

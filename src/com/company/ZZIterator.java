@@ -1,6 +1,6 @@
 package com.company;
 
-public interface MyIterator<T> {
+public interface ZZIterator<T> {
 
     boolean hasNext();
 

@@ -3,7 +3,7 @@ package com.company;
 import com.company.ZZFunctions.ZZFunction;
 import com.company.ZZFunctions.ZZTest;
 
-public interface ZZCollection<T> extends MyIterable<T>{
+public interface ZZCollection<T> extends ZZIterable<T> {
 
     int size();
 
@@ -22,13 +22,13 @@ public interface ZZCollection<T> extends MyIterable<T>{
     void add(T e);//eccezione
 
     default void addAll(ZZCollection<T> collection){
-        MyIterator<T> it = getIterator();
+        ZZIterator<T> it = getIterator();
         while( it.hasNext() )
             add( it.getNext() );
     }
 
     default void addAllExcept(ZZCollection<T> collection, ZZTest<T> tester){
-        MyIterator<T> it = getIterator();
+        ZZIterator<T> it = getIterator();
         while( it.hasNext() ) {
             T elem = it.getNext();
             if (tester.test(elem)) {
