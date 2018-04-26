@@ -1,6 +1,6 @@
 package com.company;
 
-import com.company.ZZFunctions.MyFunction;
+import com.company.ZZFunctions.ZZFunction;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -11,7 +11,7 @@ public class Main {
         // write your code here
         System.out.println("sfigato");
 
-        MyFunction<Integer,Integer> addTwo = i -> i+2;
+        ZZFunction<Integer,Integer> addTwo = i -> i+2;
         List<Integer> l = new ArrayList<>();
         l.add(1);
         l.add(2);

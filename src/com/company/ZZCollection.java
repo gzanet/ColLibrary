@@ -1,7 +1,7 @@
 package com.company;
 
-import com.company.ZZFunctions.MyFunction;
-import com.company.ZZFunctions.MyTest;
+import com.company.ZZFunctions.ZZFunction;
+import com.company.ZZFunctions.ZZTest;
 
 public interface ZZCollection<T> extends MyIterable<T>{
 
@@ -17,7 +17,7 @@ public interface ZZCollection<T> extends MyIterable<T>{
         }
     }
 
-    void removeAllExcept(MyTest<T> tester);
+    void removeAllExcept(ZZTest<T> tester);
 
     void add(T e);//eccezione
 
@@ -27,7 +27,7 @@ public interface ZZCollection<T> extends MyIterable<T>{
             add( it.getNext() );
     }
 
-    default void addAllExcept(ZZCollection<T> collection, MyTest<T> tester){
+    default void addAllExcept(ZZCollection<T> collection, ZZTest<T> tester){
         MyIterator<T> it = getIterator();
         while( it.hasNext() ) {
             T elem = it.getNext();
@@ -37,6 +37,6 @@ public interface ZZCollection<T> extends MyIterable<T>{
         }
     }
 
-    <E> ZZCollection<E> map(MyFunction<T, E> function);
+    <E> ZZCollection<E> map(ZZFunction<T, E> function);
 
 }

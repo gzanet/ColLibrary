@@ -1,5 +1,5 @@
 package com.company.ZZFunctions;
 
-public interface MyComparable {
+public interface ZZComparable {
 
 }

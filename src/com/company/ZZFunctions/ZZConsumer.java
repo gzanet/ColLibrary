@@ -1,5 +1,5 @@
 package com.company.ZZFunctions;
 
-public interface MyConsumer<T> {
+public interface ZZConsumer<T> {
     void consume(T e);
 }

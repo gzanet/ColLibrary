@@ -1,6 +1,6 @@
 package com.company.ZZFunctions;
 
-public interface MyTest<T>{
+public interface ZZTest<T>{
 
     boolean test(T e);
 }
