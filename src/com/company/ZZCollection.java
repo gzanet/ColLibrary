@@ -1,5 +1,7 @@
 package com.company;
 
+import com.company.ZZExceptions.ZZEmptyContainerException;
+import com.company.ZZExceptions.ZZNoAvailableSpaceException;
 import com.company.ZZFunctions.ZZFunction;
 import com.company.ZZFunctions.ZZTest;
 
@@ -9,25 +11,25 @@ public interface ZZCollection<T> extends ZZIterable<T> {
 
     boolean isEmpty();
 
-    T remove();// eccezione
+    T remove() throws ZZEmptyContainerException;
 
     default void removeAll(){
-        while( ! isEmpty() ) {
+        while( !isEmpty() ) {
             remove();
         }
     }
 
     void removeAllExcept(ZZTest<T> tester);
 
-    void add(T e);//eccezione
+    void add(T e) throws ZZNoAvailableSpaceException;
 
-    default void addAll(ZZCollection<T> collection){
+    default void addAll(ZZIterable<T> collection) throws ZZNoAvailableSpaceException{
         ZZIterator<T> it = getIterator();
         while( it.hasNext() )
             add( it.getNext() );
     }
 
-    default void addAllExcept(ZZCollection<T> collection, ZZTest<T> tester){
+    default void addAllExcept(ZZIterable<T> collection, ZZTest<T> tester)throws ZZNoAvailableSpaceException{
         ZZIterator<T> it = getIterator();
         while( it.hasNext() ) {
             T elem = it.getNext();

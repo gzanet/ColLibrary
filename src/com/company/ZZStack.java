@@ -1,19 +1,22 @@
 package com.company;
 
+import com.company.ZZExceptions.ZZEmptyContainerException;
+import com.company.ZZExceptions.ZZNoAvailableSpaceException;
+
 public interface ZZStack<T> extends ZZCollection<T> {
 
-    void push(T e);
+    void push(T e) throws ZZNoAvailableSpaceException;
 
-    T pop();
+    T pop() throws ZZEmptyContainerException;
 
-    T top();
+    T top()throws ZZEmptyContainerException;
 
     @Override
-    default T remove() {
+    default T remove()throws ZZEmptyContainerException {
         return pop();
     }
     @Override
-    default void add(T e){
+    default void add(T e)throws ZZNoAvailableSpaceException {
         push(e);
     }
 }
