@@ -11,12 +11,6 @@ public interface MyList<T> extends MyCollection<T> {
         insertAt(0, elem);
     }
 
-    default void insertAt(int[] position, T elem){
-        for(int i=0; i<position.length; i++){
-            insertAt(position[i], elem);
-        }
-    }
-
     default void insertAt(int[] position, T[] elem) throws InvalidArgumentException {
         if( position.length != elem.length) throw 
             new InvalidArgumentException("the number of elements contained in the arrays must be the same");
@@ -25,6 +19,14 @@ public interface MyList<T> extends MyCollection<T> {
             insertAt(position[i], elem[i]);
         }
     }
+
+    boolean contain(T e);
+
+    boolean contain(Collection<T> c);
+
+    T[] toArray();
+
+
 
     void removeHead() throws NotFoundException;
 
