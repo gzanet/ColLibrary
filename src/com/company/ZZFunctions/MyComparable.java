@@ -1,4 +1,4 @@
-package com.company.myFunctions;
+package com.company.ZZFunctions;
 
 public interface MyComparable {
 

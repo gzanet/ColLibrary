@@ -1,6 +1,6 @@
 package com.company;
 
-import com.company.myFunctions.MyFunction;
+import com.company.ZZFunctions.MyFunction;
 
 import java.util.ArrayList;
 import java.util.List;

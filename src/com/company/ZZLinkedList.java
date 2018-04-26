@@ -1,14 +1,14 @@
 package com.company;
 
-import com.company.myExceptions.NotFoundException;
+import com.company.ZZExceptions.ZZNotFoundException;
 
-public abstract class MyLinkedList<T> implements MyList<T>{
+public abstract class ZZLinkedList<T> implements ZZList<T> {
     /*
         MyNode<T> head;
         MyNode<T> n;
         MyNode<T> succ;
 
-    public MyLinkedList(MyNode<T> head);
+    public ZZLinkedList(MyNode<T> head);
 
     public void insertAt(int position, T elem) {
         n = head;
@@ -19,17 +19,17 @@ public abstract class MyLinkedList<T> implements MyList<T>{
     */
 
     @Override
-    public void removeHead() throws NotFoundException {
+    public void removeHead() {
 
     }
 
     @Override
-    public void removeAt(int position) throws NotFoundException {
+    public void removeAt(int position) {
 
     }
 
     @Override
-    public T getHead() throws NotFoundException {
+    public T getHead() {
         return null;
     }
 

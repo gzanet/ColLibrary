@@ -1,12 +1,12 @@
 package com.company;
 
-public interface MyStack<T> extends MyCollection<T> {
+public interface ZZStack<T> extends ZZCollection<T> {
 
-    public void push(T e);
+    void push(T e);
 
-    public T pop();
+    T pop();
 
-    public T top();
+    T top();
 
     @Override
     default T remove() {
