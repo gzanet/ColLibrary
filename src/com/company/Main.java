@@ -31,7 +31,7 @@ public class Main {
 
         ZZLinkedList<Integer> list2 = new ZZLinkedList<>(list);
         ZZLinkedList<Integer> list3 = new ZZLinkedList<>();
-        list3.addAllExcept(list2,  ZZTe;
+       // list3.addAllExcept(list2, ;
 
 
 
