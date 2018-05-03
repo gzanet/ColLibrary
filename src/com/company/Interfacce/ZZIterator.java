@@ -1,4 +1,4 @@
-package com.company;
+package com.company.Interfacce;
 
 import com.company.ZZExceptions.ZZEmptyContainerException;
 

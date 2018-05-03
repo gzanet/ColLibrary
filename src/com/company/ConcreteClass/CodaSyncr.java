@@ -1,15 +1,14 @@
-package com.company.test;
+package com.company.ConcreteClass;
 
-import com.company.ZZCollection;
+import com.company.ConcreteClass.Coda;
 import com.company.ZZExceptions.ZZEmptyContainerException;
 import com.company.ZZExceptions.ZZNoAvailableSpaceException;
 import com.company.ZZFunctions.ZZConsumer;
-import com.company.ZZFunctions.ZZFunction;
 import com.company.ZZFunctions.ZZTest;
-import com.company.ZZIterable;
-import com.company.ZZIterator;
+import com.company.Interfacce.ZZIterable;
+import com.company.Interfacce.ZZIterator;
 
-public class CodaSyncr<T> extends Coda<T>{
+public class CodaSyncr<T> extends Coda<T> {
     @Override
     public synchronized T dequeue() throws ZZEmptyContainerException {
         return super.dequeue();
@@ -30,15 +29,15 @@ public class CodaSyncr<T> extends Coda<T>{
         return super.isEmpty();
     }
 
-    @Override
+   /* @Override
     public synchronized void removeAllExcept(ZZTest<T> tester) {
         super.removeAllExcept(tester);
-    }
+    }*/
 
-    @Override
+    /*@Override
     public synchronized <E> ZZCollection<E> map(ZZFunction<T, E> function) {
         return super.map(function);
-    }
+    }*/
 
     @Override
     public synchronized ZZIterator<T> getIterator() {
@@ -71,8 +70,8 @@ public class CodaSyncr<T> extends Coda<T>{
     }
 
     @Override
-    public synchronized void ForEachElement(ZZConsumer<? super T> f) {
-        super.ForEachElement(f);
+    public synchronized void forEachElement(ZZConsumer<? super T> f) {
+        super.forEachElement(f);
     }
 
     @Override

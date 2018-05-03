@@ -1,45 +1,31 @@
-package com.company;
+package com.company.ConcreteClass;
 
+import com.company.Interfacce.ZZCollection;
+import com.company.Interfacce.ZZIterator;
+import com.company.Interfacce.ZZList;
 import com.company.ZZExceptions.ZZEmptyContainerException;
 import com.company.ZZExceptions.ZZNoAvailableSpaceException;
 import com.company.ZZExceptions.ZZNotFoundException;
-import com.company.ZZFunctions.ZZFunction;
-import com.company.ZZFunctions.ZZTest;
+import com.company.ZZNode.ZZSimpleNode;
 
-public class ZZLinkedList<T> implements ZZList<T> {
+public class Lista<T> implements ZZList<T> {
 
-    ZZNode<T> head;
-    ZZNode<T> tail;
+    ZZSimpleNode<T> head;
+    ZZSimpleNode<T> tail;
     int size;
-    class ZZNode<T>{
-        private T elem;
-        ZZNode<T> next;
 
-        public ZZNode(T elem, ZZNode<T> next) {
-            this.elem = elem;
-            this.next = next;
-        }
 
-        public T getElem() { return this.elem; }
-
-        public ZZNode<T> getNext(){ return this.next; }
-
-        public void setElem(T data){ this.elem = data; }
-
-        public void setNext(ZZNode<T> next){ this.next = next; }
-    }
-
-    public ZZLinkedList(){
+    public Lista(){
         this.size = 0;
         this.head = null;
         this.tail = null;
     }
-    public ZZLinkedList(T data){
+    public Lista(T data){
         this.insertHead(data);
     }
-    public ZZLinkedList(ZZCollection<T> c) {
+    public Lista(ZZIterator<T> it) {
         //throws ZZNullPointerException // meglio mettere <? extends T>
-        ZZIterator<T> it = c.getIterator();
+       // ZZIterator<T> it = c.getIterator();
         this.insertHead(it.getNext());
         int pos = 0;
         while(it.hasNext())
@@ -49,18 +35,25 @@ public class ZZLinkedList<T> implements ZZList<T> {
     public int size() { return this.size; }
     public boolean isEmpty() { return this.size == 0; }
 
+    @Override
+    public T remove() throws ZZEmptyContainerException {
+        T t=getHead();
+        removeAt(0);
+        return t;
+    }
+
     public void insertAt(int position, T data) {
         if (position < 0 || position > getSize())
             throw new ZZNotFoundException("MyNodeList.insertAt(): cannot insert at position " + position);
         if (position == 0)
-            head = new ZZNode<T>(data, head);
+            head = new ZZSimpleNode<T>(data, head);
         else {
-            ZZNode<T> n = head;
+            ZZSimpleNode<T> n = head;
             while (position > 1) {
                 n = n.getNext();
                 position--;
             }
-            n.setNext(new ZZNode<T>( data, n.getNext() ));
+            n.setNext(new ZZSimpleNode<T>( data, n.getNext() ));
         }
         size++;
     }
@@ -72,7 +65,7 @@ public class ZZLinkedList<T> implements ZZList<T> {
         if (position == 0)
             head = head.getNext();
         else {
-            ZZNode<T> n = head;
+            ZZSimpleNode<T> n = head;
             while (position-- > 1) {
                 n = n.getNext();
             }
@@ -86,7 +79,7 @@ public class ZZLinkedList<T> implements ZZList<T> {
     }*/
     public T getTail() throws ZZNotFoundException { return getAt(size-1); }
     public T getAt(int position) throws ZZNotFoundException {
-         ZZNode<T> node = head;
+        ZZSimpleNode<T> node = head;
          for(int i=0; i<position; i++){
              node = node.getNext();
          }
@@ -98,11 +91,11 @@ public class ZZLinkedList<T> implements ZZList<T> {
     public ZZIterator<T> getIterator() {
         class ZZListIterator<T> implements ZZIterator<T>{
             private int position;
-            private ZZNode<T> node;
+            private ZZSimpleNode<T> node;
 
             ZZListIterator(){
                 position=0;
-                node = (ZZNode<T>) head; // perchè è necessario il cast ?
+                node = (ZZSimpleNode<T>) head; // perchè è necessario il cast ?
             }
 
             public boolean hasNext() {
@@ -121,7 +114,7 @@ public class ZZLinkedList<T> implements ZZList<T> {
     }
 
     public void setValue(int position, T value) throws ZZNotFoundException{
-        ZZNode<T> node = head;
+        ZZSimpleNode<T> node = head;
 
         while(position > 0)
             node = node.getNext();

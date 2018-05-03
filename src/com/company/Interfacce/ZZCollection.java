@@ -1,9 +1,8 @@
-package com.company;
+package com.company.Interfacce;
 
 import com.company.ZZExceptions.ZZEmptyContainerException;
 import com.company.ZZExceptions.ZZInvalidArgumentException;
 import com.company.ZZExceptions.ZZNoAvailableSpaceException;
-import com.company.ZZFunctions.ZZFunction;
 import com.company.ZZFunctions.ZZTest;
 
 import java.util.Iterator;
@@ -14,21 +13,21 @@ public interface ZZCollection<T> extends ZZIterable<T> {
 
     boolean isEmpty();
 
-    //T remove(Object o) throws ZZEmptyContainerException;
-    /*default void removeAll(){
-        Iterator<T> it = (Iterator<T>) getIterator();
+    T remove() throws ZZEmptyContainerException;
+
+    default void removeAll(){
+        ZZIterator<T> it =this.getIterator();
         while( it.hasNext() ) {
-            remove(it.next());
+            remove();
         }
-    }*/
-    /*default void removeAllExcept(ZZIterable<T> collection, ZZTest<T> tester) throws ZZInvalidArgumentException {
+    }
+    default void removeAllExcept(ZZIterable<T> collection, ZZTest<T> tester){
         Iterator<T> it = (Iterator<T>) this.getIterator();
         while(it.hasNext()){
-            T e = it.next();
-            if( tester.test(e) )
-                remove(e);
+            if( tester.test(it.next()) )
+                remove();
         }
-    }*/
+    }
 
     void add(T e) throws ZZNoAvailableSpaceException;
     default void addAll(ZZIterable<T> collection) throws ZZNoAvailableSpaceException{

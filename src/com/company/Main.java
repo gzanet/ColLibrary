@@ -1,7 +1,7 @@
 package com.company;
 
+import com.company.ConcreteClass.Lista;
 import com.company.ZZFunctions.ZZFunction;
-import com.company.ZZFunctions.ZZTest;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -24,13 +24,13 @@ public class Main {
         System.out.println(l);
 
         //ESEMPIO 2
-        ZZLinkedList<Integer> list = new ZZLinkedList<>(13);
+        Lista<Integer> list = new Lista<>(13);
         list.add(2);
         list.add(3);
         list.add(5);
 
-        ZZLinkedList<Integer> list2 = new ZZLinkedList<>(list);
-        ZZLinkedList<Integer> list3 = new ZZLinkedList<>();
+        Lista<Integer> list2 = new Lista<>(list);
+        Lista<Integer> list3 = new Lista<>();
        // list3.addAllExcept(list2, ;
 
 

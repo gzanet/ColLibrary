@@ -1,12 +1,9 @@
-package com.company.test;
+package com.company.ConcreteClass;
 
-import com.company.ZZCollection;
 import com.company.ZZExceptions.ZZEmptyContainerException;
 import com.company.ZZExceptions.ZZNoAvailableSpaceException;
-import com.company.ZZFunctions.ZZFunction;
-import com.company.ZZFunctions.ZZTest;
-import com.company.ZZIterator;
-import com.company.ZZQueue;
+import com.company.Interfacce.ZZIterator;
+import com.company.Interfacce.ZZQueue;
 
 public class Coda<T> implements ZZQueue<T> {
 
@@ -33,16 +30,6 @@ public class Coda<T> implements ZZQueue<T> {
     @Override
     public boolean isEmpty() {
         return false;
-    }
-
-    @Override
-    public void removeAllExcept(ZZTest<T> tester) {
-
-    }
-
-    @Override
-    public <E> ZZCollection<E> map(ZZFunction<T, E> function) {
-        return null;
     }
 
     @Override
