@@ -2,34 +2,35 @@ package com.company;
 
 import com.company.ZZExceptions.ZZInvalidArgumentException;
 import com.company.ZZExceptions.ZZNotFoundException;
+import com.company.ZZFunctions.ZZTest;
 
 public interface ZZList<T> extends ZZCollection<T> {
-
-    void insertAt(int position, T elem);
 
     default void insertHead(T elem){
         insertAt(0, elem);
     }
+    void insertAt(int position, T elem);
+    default void insertAt(ZZCollection<Integer> pos,  ZZCollection<T> col){ // utilizzare <? extends T>
+        ZZIterator<T> it = col.getIterator();
+        ZZIterator<Integer> jt = pos.getIterator();
+        if( pos.size() != col.size() )
+            throw new ZZInvalidArgumentException("size parameter of the collections must be the same");
 
-    default void insertAt(int[] position, T elem){
-        for (int aPosition : position) {
-            insertAt(aPosition, elem);
-        }
+        while( it.hasNext() )
+            this.insertAt(jt.getNext(), it.getNext());
     }
 
-    default void insertAt(int[] position, T[] elem) throws ZZInvalidArgumentException {
-        if( position.length != elem.length) throw 
-            new ZZInvalidArgumentException("the number of elements contained in the arrays must be the same");
-
-        for(int i=0; i<position.length; i++){
-            insertAt(position[i], elem[i]);
-        }
-    }
-
-    void removeHead() throws ZZNotFoundException;
-
+    default void removeHead() throws ZZNotFoundException{ removeAt(0); }
     void removeAt(int position) throws ZZNotFoundException;
+    default void removeAt(ZZCollection<Integer> pos,  ZZCollection<T> col){
+        ZZIterator<Integer> it = pos.getIterator();
+        if( pos.size() != col.size() )
+            throw new ZZInvalidArgumentException("size parameter of the collections must be the same");
 
-    T getHead() throws ZZNotFoundException;
+        while(it.hasNext() )
+            this.removeAt(it.getNext());
+    }
 
+    T getAt(int position) throws ZZNotFoundException;
+    default T getHead() throws ZZNotFoundException { return getAt(0); };
 }
