@@ -9,7 +9,7 @@ import com.company.ZZNode.ZZSimpleNode;
 
 public class Pila<T> implements ZZStack<T> {
 
-    private static String ErrorEmptyContainer ="Errore: la coda è vuota";
+    private static String ErrorEmptyContainer ="Errore: la pila è vuota";
     private int size;
     private ZZSimpleNode<T> head;
 
@@ -48,7 +48,7 @@ public class Pila<T> implements ZZStack<T> {
             ZZSimpleNode<T> p=head;
             @Override
             public boolean hasNext() {
-                return p==null;
+                return p!=null;
             }
 
             @Override
