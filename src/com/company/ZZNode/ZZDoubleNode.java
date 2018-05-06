@@ -8,13 +8,13 @@ public class ZZDoubleNode<T> extends ZZSimpleNode {
 
     }
 
-    public ZZDoubleNode(T elem, ZZDoubleNode next) {
-        this(elem, next,null);
-    }
-
     public ZZDoubleNode(T elem, ZZDoubleNode next, ZZDoubleNode prev) {
         super(elem, next);
         this.prev=prev;
     }
+
+    public ZZDoubleNode<T> getPrev(){ return this.prev; }
+
+    public void setPrev(ZZDoubleNode<T> prev){ this.prev = prev; }
 
 }

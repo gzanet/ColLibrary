@@ -11,7 +11,9 @@ public interface ZZCollection<T> extends ZZIterable<T> {
 
     int size();
 
-    boolean isEmpty();
+    default boolean isEmpty(){
+        return size()==0;
+    }
 
     T remove() throws ZZEmptyContainerException;
 
@@ -21,13 +23,7 @@ public interface ZZCollection<T> extends ZZIterable<T> {
             remove();
         }
     }
-    default void removeAllExcept(ZZIterable<T> collection, ZZTest<T> tester){
-        Iterator<T> it = (Iterator<T>) this.getIterator();
-        while(it.hasNext()){
-            if( tester.test(it.next()) )
-                remove();
-        }
-    }
+    void removeAllExcept(ZZTest<T> tester);
 
     void add(T e) throws ZZNoAvailableSpaceException;
     default void addAll(ZZIterable<T> collection) throws ZZNoAvailableSpaceException{

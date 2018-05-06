@@ -20,4 +20,5 @@ public interface ZZStack<T> extends ZZCollection<T> {
     default void add(T e)throws ZZNoAvailableSpaceException {
         push(e);
     }
+
 }
