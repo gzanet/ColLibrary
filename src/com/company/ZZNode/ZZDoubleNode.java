@@ -1,6 +1,6 @@
 package com.company.ZZNode;
 
-public class ZZDoubleNode<T> extends ZZSimpleNode {
+public class ZZDoubleNode<T> extends ZZSimpleNode<T> {
     ZZDoubleNode prev;
 
     public ZZDoubleNode(T elem) {
@@ -16,5 +16,6 @@ public class ZZDoubleNode<T> extends ZZSimpleNode {
     public ZZDoubleNode<T> getPrev(){ return this.prev; }
 
     public void setPrev(ZZDoubleNode<T> prev){ this.prev = prev; }
+
 
 }

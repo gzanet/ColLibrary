@@ -6,6 +6,7 @@ import com.company.Interfacce.ZZList;
 import com.company.ZZExceptions.ZZEmptyContainerException;
 import com.company.ZZExceptions.ZZNoAvailableSpaceException;
 import com.company.ZZExceptions.ZZNotFoundException;
+import com.company.ZZFunctions.ZZTest;
 import com.company.ZZNode.ZZSimpleNode;
 
 public class Lista<T> implements ZZList<T> {
@@ -40,6 +41,11 @@ public class Lista<T> implements ZZList<T> {
         T t=getHead();
         removeAt(0);
         return t;
+    }
+
+    @Override
+    public void removeAllExcept(ZZTest<T> tester) {
+        
     }
 
     public void insertAt(int position, T data) {
