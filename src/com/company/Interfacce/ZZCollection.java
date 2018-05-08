@@ -3,6 +3,7 @@ package com.company.Interfacce;
 import com.company.ZZExceptions.ZZEmptyContainerException;
 import com.company.ZZExceptions.ZZInvalidArgumentException;
 import com.company.ZZExceptions.ZZNoAvailableSpaceException;
+import com.company.ZZFunctions.ZZFunction;
 import com.company.ZZFunctions.ZZTest;
 
 import java.util.Iterator;
@@ -18,8 +19,7 @@ public interface ZZCollection<T> extends ZZIterable<T> {
     T remove() throws ZZEmptyContainerException;
 
     default void removeAll(){
-        ZZIterator<T> it =this.getIterator();
-        while( it.hasNext() ) {
+        while(!isEmpty()){
             remove();
         }
     }
@@ -40,5 +40,7 @@ public interface ZZCollection<T> extends ZZIterable<T> {
             }
         }
     }
+
+    <S> ZZCollection<S> map(ZZFunction<T,S> fun);
 
 }

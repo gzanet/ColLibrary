@@ -14,6 +14,7 @@ public interface ZZList<T> extends ZZCollection<T> {
         removeHead();
         return e;
     }
+
     @Override
     default void add(T e)throws ZZNoAvailableSpaceException {
         insertHead(e);
@@ -25,8 +26,8 @@ public interface ZZList<T> extends ZZCollection<T> {
     default void insertTail(T elem){
         insertAt(size()-1, elem);
     }//controllo già vuota
-
     void insertAt(int position, T elem);
+
     default void insertAt(ZZCollection<Integer> pos,  ZZCollection<T> col){ // utilizzare <? extends T>
         ZZIterator<T> it = col.getIterator();
         ZZIterator<Integer> jt = pos.getIterator();
@@ -37,9 +38,10 @@ public interface ZZList<T> extends ZZCollection<T> {
             this.insertAt(jt.getNext(), it.getNext());
     }
 
-    default void removeHead() throws ZZEmptyContainerException{ removeAt(0); }
-    void removeAt(int position) throws ZZEmptyContainerException;
-    default void removeAt(ZZCollection<Integer> pos,  ZZCollection<T> col) throws ZZEmptyContainerException{
+    default T removeHead() throws ZZEmptyContainerException{ return removeAt(0); }
+    default T removeTail() throws ZZEmptyContainerException{ return removeAt(size()-1); }
+    T removeAt(int position) throws ZZEmptyContainerException;
+    default void removeAt(ZZCollection<Integer> pos,  ZZCollection<T> col) throws ZZEmptyContainerException{/*TODO da rivedere*/
         ZZIterator<Integer> it = pos.getIterator();
         if( pos.size() != col.size() )
             throw new ZZInvalidArgumentException("size parameter of the collections must be the same");
@@ -51,4 +53,15 @@ public interface ZZList<T> extends ZZCollection<T> {
     T getAt(int position) throws ZZNotFoundException;
     default T getHead() throws ZZNotFoundException { return getAt(0); };
     default T gettail() throws ZZNotFoundException { return getAt(size()-1); };
+
+
+    int indexOf(T elem);
+    default boolean isContained(T elem){
+        return indexOf(elem)!=-1;
+    }
+
+    void sort();
+
+
+
 }

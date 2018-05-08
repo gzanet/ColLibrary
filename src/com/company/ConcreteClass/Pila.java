@@ -1,9 +1,11 @@
 package com.company.ConcreteClass;
 
+import com.company.Interfacce.ZZCollection;
 import com.company.Interfacce.ZZIterable;
 import com.company.Interfacce.ZZIterator;
 import com.company.Interfacce.ZZStack;
 import com.company.ZZExceptions.ZZEmptyContainerException;
+import com.company.ZZFunctions.ZZFunction;
 import com.company.ZZFunctions.ZZTest;
 import com.company.ZZNode.ZZSimpleNode;
 
@@ -40,6 +42,16 @@ public class Pila<T> implements ZZStack<T> {
         temp.addAllExcept(this,tester);
         removeAll();
         addAll(temp);
+    }
+
+    @Override
+    public <S> ZZCollection<S> map(ZZFunction<T, S> fun) {
+        Pila<S> temp=new Pila<>();
+        ZZIterator<T> it=getIterator();
+        while(it.hasNext()){
+            temp.push(fun.apply(it.getNext()));
+        }
+        return new Pila<S>(temp);
     }
 
     @Override

@@ -6,6 +6,7 @@ import com.company.Interfacce.ZZList;
 import com.company.ZZExceptions.ZZEmptyContainerException;
 import com.company.ZZExceptions.ZZNoAvailableSpaceException;
 import com.company.ZZExceptions.ZZNotFoundException;
+import com.company.ZZFunctions.ZZFunction;
 import com.company.ZZFunctions.ZZTest;
 import com.company.ZZNode.ZZSimpleNode;
 
@@ -64,6 +65,11 @@ public class Lista<T> implements ZZList<T> {
         size++;
     }
     public void add(T e) throws ZZNoAvailableSpaceException { this.insertAt(size, e); }
+
+    @Override
+    public <S> ZZCollection<S> map(ZZFunction<T, S> fun) {
+        return null;
+    }
 
     public void removeAt(int position) throws ZZNotFoundException {
         if (position < 0 || position >= size())
@@ -126,4 +132,6 @@ public class Lista<T> implements ZZList<T> {
             node = node.getNext();
         node.setElem(value);
     }
+
+
 }

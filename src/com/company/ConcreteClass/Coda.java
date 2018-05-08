@@ -1,10 +1,12 @@
 package com.company.ConcreteClass;
 
+import com.company.Interfacce.ZZCollection;
 import com.company.Interfacce.ZZIterable;
 import com.company.ZZExceptions.ZZEmptyContainerException;
 import com.company.ZZExceptions.ZZNoAvailableSpaceException;
 import com.company.Interfacce.ZZIterator;
 import com.company.Interfacce.ZZQueue;
+import com.company.ZZFunctions.ZZFunction;
 import com.company.ZZFunctions.ZZTest;
 import com.company.ZZNode.ZZDoubleNode;
 import com.company.ZZNode.ZZSimpleNode;
@@ -84,6 +86,16 @@ public class Coda<T> implements ZZQueue<T> {
         head=temp.head;
         tail=temp.tail;
         size=temp.size;
+    }
+
+    @Override
+    public <S> ZZCollection<S> map(ZZFunction<T,S> fun) {
+        Coda<S> temp=new Coda<>();
+        ZZIterator<T> it=getIterator();
+        while(it.hasNext()){
+            temp.enqueue(fun.apply(it.getNext()));
+        }
+        return temp;
     }
 
     @Override
