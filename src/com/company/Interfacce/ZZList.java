@@ -20,35 +20,24 @@ public interface ZZList<T> extends ZZCollection<T> {
         insertHead(e);
     }
 
-    default void insertHead(T elem){
+    default ZZList<T> insertHead(T elem){
         insertAt(0, elem);
+        return this;
     }
-    default void insertTail(T elem){
-        insertAt(size()-1, elem);
-    }//controllo già vuota
-    void insertAt(int position, T elem);
-
-    default void insertAt(ZZCollection<Integer> pos,  ZZCollection<T> col){ // utilizzare <? extends T>
-        ZZIterator<T> it = col.getIterator();
-        ZZIterator<Integer> jt = pos.getIterator();
-        if( pos.size() != col.size() )
-            throw new ZZInvalidArgumentException("size parameter of the collections must be the same");
-
-        while( it.hasNext() )
-            this.insertAt(jt.getNext(), it.getNext());
+    default ZZList<T> insertTail(T elem){
+        insertAt(size()-1==-1?0:size()-1, elem);
+        return this;
     }
+    ZZList<T> insertAt(int position, T elem);
+    ZZList<T> inserAt(int position, ZZCollection<T> col);
+
 
     default T removeHead() throws ZZEmptyContainerException{ return removeAt(0); }
     default T removeTail() throws ZZEmptyContainerException{ return removeAt(size()-1); }
     T removeAt(int position) throws ZZEmptyContainerException;
-    default void removeAt(ZZCollection<Integer> pos,  ZZCollection<T> col) throws ZZEmptyContainerException{/*TODO da rivedere*/
-        ZZIterator<Integer> it = pos.getIterator();
-        if( pos.size() != col.size() )
-            throw new ZZInvalidArgumentException("size parameter of the collections must be the same");
+    ZZList<T> removeFrom(int position);
+    ZZList<T> removeUntil(int position);
 
-        while(it.hasNext() )
-            this.removeAt(it.getNext());
-    }
 
     T getAt(int position) throws ZZNotFoundException;
     default T getHead() throws ZZNotFoundException { return getAt(0); };
@@ -56,6 +45,7 @@ public interface ZZList<T> extends ZZCollection<T> {
 
 
     int indexOf(T elem);
+    int lastIndeOf(T elem);
     default boolean isContained(T elem){
         return indexOf(elem)!=-1;
     }

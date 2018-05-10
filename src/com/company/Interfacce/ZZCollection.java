@@ -28,14 +28,22 @@ public interface ZZCollection<T> extends ZZIterable<T> {
     void add(T e) throws ZZNoAvailableSpaceException;
 
     default void addAll(ZZIterable<T> collection) throws ZZNoAvailableSpaceException{
-        ZZIterator<T> it = collection.getIterator();
+
+        addAllExcept(collection, new ZZTest<T>() {
+            @Override
+            public boolean test(T e) {
+                return true;
+            }
+        });
+       /* ZZIterator<T> it = collection.getIterator();
         while( it.hasNext() )
-            add( it.getNext() );
+            add( it.getNext() );*/
     }
     default void addAllExcept(ZZIterable<T> collection, ZZTest<T> tester)throws ZZNoAvailableSpaceException{
         ZZIterator<T> it = collection.getIterator();
         while( it.hasNext() ) {
-            T elem = it.getNext();if (tester.test(elem)) {
+            T elem = it.getNext();
+            if (tester.test(elem)) {
                 add(elem);
             }
         }
