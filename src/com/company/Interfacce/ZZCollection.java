@@ -3,6 +3,7 @@ package com.company.Interfacce;
 import com.company.ZZExceptions.ZZEmptyContainerException;
 import com.company.ZZExceptions.ZZInvalidArgumentException;
 import com.company.ZZExceptions.ZZNoAvailableSpaceException;
+import com.company.ZZFunctions.ZZFold;
 import com.company.ZZFunctions.ZZFunction;
 import com.company.ZZFunctions.ZZTest;
 
@@ -50,5 +51,13 @@ public interface ZZCollection<T> extends ZZIterable<T> {
     }
 
     <S> ZZCollection<S> map(ZZFunction<T,S> fun);
+
+    default <S> S fold(S acc, ZZFold<S,T> fun){
+        ZZIterator<T> it = getIterator();
+        while(it.hasNext()){
+            acc=fun.apply(acc,it.getNext());
+        }
+        return acc;
+    }
 
 }
