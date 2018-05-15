@@ -4,6 +4,7 @@ import com.company.ConcreteClass.Coda;
 import com.company.ConcreteClass.Pila;
 import com.company.Interfacce.ZZCollection;
 import com.company.Interfacce.ZZIterator;
+import com.company.ZZFunctions.ZZFold;
 
 
 public class Test {
@@ -79,5 +80,33 @@ public class Test {
         p.addAllExcept(pila,e -> (e % 2) == 0);
 
         stampa_zzIterable("coda", p);
+    }
+
+    public static void fold_test(){
+       int n=20;
+       double controllo=0;
+       int ris=0;
+       ZZCollection<Integer> col=new Coda<>();
+       for(int i=0;i<n;i++){
+           controllo+=i;
+           col.add(i);
+       }
+       ris=col.fold(0, new ZZFold<Integer, Integer>() {
+           @Override
+           public Integer apply(Integer acc, Integer elem) {
+               return acc+elem;
+           }
+       });
+       System.out.println(String.format("Somma: \n Atteso: %f \n Calcolato: %d",controllo,ris));
+
+       double media= controllo/n;
+       double r=col.fold(0.0, new ZZFold<Double, Integer>() {
+           @Override
+           public Double apply(Double acc, Integer elem) {
+               return acc + elem.doubleValue()/n;
+           }
+       });
+       System.out.println(String.format("Media: \n Atteso: %f \n Calcolato: %f",media, r));
+
     }
 }

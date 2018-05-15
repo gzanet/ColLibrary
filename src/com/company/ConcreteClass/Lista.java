@@ -6,14 +6,10 @@ import com.company.Interfacce.ZZIterator;
 import com.company.Interfacce.ZZList;
 import com.company.ZZExceptions.ZZEmptyContainerException;
 import com.company.ZZExceptions.ZZInvalidArgumentException;
-import com.company.ZZExceptions.ZZNoAvailableSpaceException;
 import com.company.ZZExceptions.ZZNotFoundException;
 import com.company.ZZFunctions.ZZFunction;
 import com.company.ZZFunctions.ZZTest;
 import com.company.ZZNode.ZZDoubleNode;
-import com.company.ZZNode.ZZSimpleNode;
-
-import java.util.Iterator;
 
 public class Lista<T> implements ZZList<T> {
 
@@ -52,7 +48,7 @@ public class Lista<T> implements ZZList<T> {
            head=new ZZDoubleNode<>(elem);
            tail=head;
        }else{
-           ZZDoubleNode<T> temp=new ZZDoubleNode<>(elem,tail,null);
+           ZZDoubleNode<T> temp=new ZZDoubleNode<>(elem,null,tail);
            tail=temp;
        }
        size++;
@@ -61,7 +57,7 @@ public class Lista<T> implements ZZList<T> {
     @Override
     public ZZList<T> insertAt(int position, T elem) {
        if(position<0){throw new ZZInvalidArgumentException("indece sbagliato");}
-       if(position>=size){
+       if(position>=size-1){
            return insertTail(elem);
        }
        else if(position==0){
@@ -112,7 +108,7 @@ public class Lista<T> implements ZZList<T> {
        else{
            ZZDoubleNode<T> temp=head;
            head=head.getNext();
-           temp.delete();
+           temp.sconcatena();
            size--;
            return temp.getElem();
        }
@@ -132,7 +128,7 @@ public class Lista<T> implements ZZList<T> {
         else{
             ZZDoubleNode<T> temp=tail;
             tail=tail.getPrev();
-            temp.delete();
+            temp.sconcatena();
             size--;
             return temp.getElem();
         }
@@ -141,23 +137,30 @@ public class Lista<T> implements ZZList<T> {
     @Override
     public T removeAt(int position) throws ZZEmptyContainerException {
        //controlli testa,coda, input
-        ZZDoubleNode<T> temp;
-        if(position<size/2){//siamo più vicini alla testa
-            temp=head;
-            for(int i=0;i<position;i++){
-                temp=temp.getNext();
-            }
+        if(position<0 || position>=size){throw new ZZEmptyContainerException("indici  sbagliati");}
+        else if(position==0){
+            return removeHead();
         }
-        else{
-            temp=tail;
-            for(int i=size-1;i>position;i--){
-                temp=temp.getPrev();
-            }
+        else if(position==size-1){
+            return removeTail();
         }
-        temp.delete();
-        size--;
-        return temp.getElem();
-
+        else {
+            ZZDoubleNode<T> temp;
+            if (position < size / 2) {//siamo più vicini alla testa
+                temp = head;
+                for (int i = 0; i < position; i++) {
+                    temp = temp.getNext();
+                }
+            } else {
+                temp = tail;
+                for (int i = size - 1; i > position; i--) {
+                    temp = temp.getPrev();
+                }
+            }
+            temp.sconcatena();
+            size--;
+            return temp.getElem();
+        }
     }
 
     @Override
@@ -180,17 +183,52 @@ public class Lista<T> implements ZZList<T> {
 
     @Override
     public T getAt(int position) throws ZZNotFoundException {
-        return null;
+       if(size==0){throw new ZZEmptyContainerException("Lista vuota");
+       }
+       else if(position<0 || position>=size){throw new ZZInvalidArgumentException("posizione non valida"); }
+       else{
+           ZZDoubleNode<T> temp;
+           if (position < size / 2) {//siamo più vicini alla testa
+               temp = head;
+               for (int i = 0; i < position; i++) {
+                   temp = temp.getNext();
+               }
+           } else {
+               temp = tail;
+               for (int i = size - 1; i > position; i--) {
+                   temp = temp.getPrev();
+               }
+           }
+           return temp.getElem();
+       }
+
     }
 
     @Override
     public int indexOf(T elem) {
-        return 0;
+       int position=0;
+       ZZDoubleNode<T> temp=head;
+       boolean trovato=false;
+       while(position<size && !trovato){
+           trovato=temp.getElem().equals(elem);
+           position++;
+           temp=temp.getNext();
+       }
+       return trovato?position-1:-1;
+
     }
 
     @Override
     public int lastIndeOf(T elem) {
-        return 0;
+        int position=size-1;
+        ZZDoubleNode<T> temp=tail;
+        boolean trovato=false;
+        while(position>0 && !trovato){
+            trovato=temp.getElem().equals(elem);
+            position--;
+            temp=temp.getPrev();
+        }
+        return trovato?position+1:-1;
     }
 
     @Override
@@ -205,16 +243,60 @@ public class Lista<T> implements ZZList<T> {
 
     @Override
     public void removeAllExcept(ZZTest<T> tester) {
+        boolean testa=false;
+        ZZDoubleNode<T> temp=head;
+        while(!testa && temp!=null){
+            if(tester.test(temp.getElem())){
+                testa=true;
+                temp=temp.getNext();
+            }
+            else{
+                removeHead();
+                temp=head;
+            }
+        }
+        while(temp!=null && temp!=tail){
+            if(!tester.test(temp.getElem())){
+                temp=temp.getNext();
+                temp.getPrev().sconcatena();
+            }
+            else {
+                temp = temp.getNext();
+            }
+        }
+        if(tail!=null && !tester.test(tail.getElem())){
+            removeTail();
+        }
 
     }
 
     @Override
     public <S> ZZCollection<S> map(ZZFunction<T, S> fun) {
-        return null;
+        Lista<S> ris= new Lista<>();
+        ZZDoubleNode<T> temp=head;
+        for(int i=0;i<size;i++){
+            ris.insertTail(fun.apply(temp.getElem()));
+            temp=temp.getNext();
+        }
+        return ris;
     }
 
     @Override
     public ZZIterator<T> getIterator() {
-        return null;
+        return new ZZIterator<T>() {
+            ZZDoubleNode<T> temp=head;
+            @Override
+            public boolean hasNext() {
+                return temp!=null;
+            }
+
+            @Override
+            public T getNext() throws ZZEmptyContainerException {
+                if(temp==null){throw  new ZZEmptyContainerException("vuoto");}
+                T elem=temp.getElem();
+                temp=temp.getNext();
+                return elem;
+            }
+        };
     }
 }

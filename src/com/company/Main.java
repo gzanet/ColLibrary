@@ -35,7 +35,8 @@ public class Main {
        // list3.addAllExcept(list2, ;
 */
     //Test.stack_test();
-        Test.queue_test();
+        //Test.queue_test();
+        Test.fold_test();
 
     }
 
