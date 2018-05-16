@@ -1,9 +1,6 @@
 package com.company.ConcreteClass;
 
-import com.company.Interfacce.ZZCollection;
-import com.company.Interfacce.ZZIterable;
-import com.company.Interfacce.ZZIterator;
-import com.company.Interfacce.ZZList;
+import com.company.Interfacce.*;
 import com.company.ZZExceptions.ZZEmptyContainerException;
 import com.company.ZZExceptions.ZZInvalidArgumentException;
 import com.company.ZZExceptions.ZZNotFoundException;
@@ -15,7 +12,6 @@ public class Lista<T> implements ZZList<T> {
 
     ZZDoubleNode<T> head;
     ZZDoubleNode<T> tail;
-
     int size;
 
    public Lista(){
@@ -93,6 +89,13 @@ public class Lista<T> implements ZZList<T> {
         return this;
     }
 
+    @Override
+    public void removeAll(){
+       size=0;
+       head=null;
+       tail=null;
+    }
+
     public T removeHead() throws ZZEmptyContainerException{
        if(size==0){
            throw new ZZEmptyContainerException("vuota");
@@ -163,6 +166,7 @@ public class Lista<T> implements ZZList<T> {
         }
     }
 
+    //fare senza ricreazione nodi
     @Override
     public ZZList<T> removeFrom(int position) {
         Lista<T> temp=new Lista<T>();
@@ -174,10 +178,13 @@ public class Lista<T> implements ZZList<T> {
 
     @Override
     public ZZList<T> removeUntil(int position) {
-        Lista<T> temp=new Lista<T>();
+        /*Lista<T> temp=new Lista<T>();
         while(position<size){
             temp.insertTail(removeHead());
         }
+        return temp;*/
+        Lista<T> temp=(Lista)removeFrom(position);
+        swap(temp);
         return temp;
     }
 
@@ -231,6 +238,7 @@ public class Lista<T> implements ZZList<T> {
         return trovato?position+1:-1;
     }
 
+    //tipi comparable
     @Override
     public void sort() {
 
@@ -272,7 +280,7 @@ public class Lista<T> implements ZZList<T> {
 
     @Override
     public <S> ZZCollection<S> map(ZZFunction<T, S> fun) {
-        Lista<S> ris= new Lista<>();
+        Lista<S> ris= new Lista<S>();
         ZZDoubleNode<T> temp=head;
         for(int i=0;i<size;i++){
             ris.insertTail(fun.apply(temp.getElem()));
@@ -298,5 +306,19 @@ public class Lista<T> implements ZZList<T> {
                 return elem;
             }
         };
+    }
+
+    private void swap(Lista<T> list){
+        ZZDoubleNode<T> node=head;
+        head=list.head;
+        list.head=node;
+
+        node=tail;
+        tail=list.tail;
+        list.tail=node;
+
+        int s=size;
+        size=list.size;
+        list.size=s;
     }
 }

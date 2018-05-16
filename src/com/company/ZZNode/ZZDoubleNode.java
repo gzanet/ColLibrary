@@ -12,14 +12,8 @@ public class ZZDoubleNode<T>{
 
     public ZZDoubleNode(T elem, ZZDoubleNode next, ZZDoubleNode prev) {
         this.elem = elem;
-        this.next = next;
-        this.prev=prev;
-        if(next!=null){
-            next.setPrev(this);
-        }
-        if(prev!=null){
-            prev.setNext(this);
-        }
+        setNext(next);
+        setPrev(prev);
     }
 
 
@@ -32,9 +26,18 @@ public class ZZDoubleNode<T>{
     public ZZDoubleNode<T> getNext(){ return this.next; }
 
 
-    //rendere più consistenti
-    public void setPrev(ZZDoubleNode<T> prev){ this.prev = prev;}
-    public void setNext(ZZDoubleNode<T> next){ this.next = next;}
+    public void setPrev(ZZDoubleNode<T> prev){
+        this.prev = prev;
+        if(prev!=null) {
+            prev.next = this;
+        }
+    }
+    public void setNext(ZZDoubleNode<T> next){
+        this.next = next;
+        if(next!=null) {
+            next.prev = this;
+        }
+    }
 
 
     public void sconcatena(){ //sconcatena
@@ -42,9 +45,20 @@ public class ZZDoubleNode<T>{
             prev.setNext(next);
         }
         if(next!=null) {
-            getNext().setPrev(prev);
+            next.setPrev(prev);
         }
         prev=null;
         next=null;
+    }
+
+    public static <T> void swap(ZZDoubleNode<T> node1, ZZDoubleNode<T> node2){
+        node1.swap(node2);
+    }
+
+    //scambi solo valori, scambiare tutti i nodi?
+    public void swap(ZZDoubleNode<T> node){
+        T temp=node.elem;
+        node.elem=elem;
+        elem=temp;
     }
 }

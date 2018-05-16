@@ -2,7 +2,7 @@ package com.company.ZZNode;
 
 public class ZZSimpleNode<T> {
     private T elem;
-    ZZSimpleNode<T> next;
+    private ZZSimpleNode<T> next;
 
     public ZZSimpleNode(T elem) {
         this(elem,null);

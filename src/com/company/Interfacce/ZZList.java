@@ -4,6 +4,7 @@ import com.company.ZZExceptions.ZZEmptyContainerException;
 import com.company.ZZExceptions.ZZInvalidArgumentException;
 import com.company.ZZExceptions.ZZNoAvailableSpaceException;
 import com.company.ZZExceptions.ZZNotFoundException;
+import com.company.ZZFunctions.ZZFunction;
 
 //inserimento può lanciare eccezione
 public interface ZZList<T> extends ZZCollection<T> {
@@ -51,7 +52,4 @@ public interface ZZList<T> extends ZZCollection<T> {
     }
 
     void sort();
-
-
-
 }
