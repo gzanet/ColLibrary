@@ -1,8 +1,8 @@
 package com.company.ZZNode;
 
 public class ZZDoubleNode<T>{
-    private ZZDoubleNode prev;
-    private ZZDoubleNode next;
+    private ZZDoubleNode<T> prev;
+    private ZZDoubleNode<T> next;
     private T elem;
 
     public ZZDoubleNode(T elem) {
@@ -25,17 +25,55 @@ public class ZZDoubleNode<T>{
     public ZZDoubleNode<T> getPrev(){ return this.prev; }
     public ZZDoubleNode<T> getNext(){ return this.next; }
 
-
-    public void setPrev(ZZDoubleNode<T> prev){
-        this.prev = prev;
-        if(prev!=null) {
-            prev.next = this;
+    public void setPrev(){
+        if(prev!=null){
+            prev.next=null;
+            prev=null;
         }
     }
-    public void setNext(ZZDoubleNode<T> next){
-        this.next = next;
-        if(next!=null) {
-            next.prev = this;
+
+    //prev nodo singolo
+    public void setPrev(ZZDoubleNode<T> x){
+        if(x==null){
+            setPrev();
+        }
+        else{
+            ZZDoubleNode<T> temp=this.prev;
+            x.sconcatena();
+
+            x.next = this;
+            this.prev=x;
+
+            if(temp!=null) {
+                temp.next = x;
+            }
+            x.prev=temp;
+        }
+    }
+
+    public void setNext(){
+        if(next!=null){
+            next.prev=null;
+            next=null;
+        }
+    }
+
+
+    public void setNext(ZZDoubleNode<T> x){
+        if(x==null){
+            setNext();
+        }
+        else{
+            ZZDoubleNode<T> temp=this.next;
+            x.sconcatena();
+
+            x.prev = this;
+            this.next=x;
+
+            if(temp!=null) {
+                temp.prev = x;
+            }
+            x.next=temp;
         }
     }
 

@@ -4,6 +4,7 @@ import com.company.ZZExceptions.ZZEmptyContainerException;
 import com.company.ZZExceptions.ZZInvalidArgumentException;
 import com.company.ZZExceptions.ZZNoAvailableSpaceException;
 import com.company.ZZExceptions.ZZNotFoundException;
+import com.company.ZZFunctions.ZZBFunction;
 import com.company.ZZFunctions.ZZFunction;
 
 //inserimento può lanciare eccezione
@@ -51,5 +52,7 @@ public interface ZZList<T> extends ZZCollection<T> {
         return indexOf(elem)!=-1;
     }
 
-    void sort();
+    void sort(ZZBFunction<Integer,T,T> confronto);
+
+    <S> ZZCollection<S> map(ZZFunction<T, S> fun);
 }

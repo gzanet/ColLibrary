@@ -4,6 +4,7 @@ import com.company.Interfacce.*;
 import com.company.ZZExceptions.ZZEmptyContainerException;
 import com.company.ZZExceptions.ZZInvalidArgumentException;
 import com.company.ZZExceptions.ZZNotFoundException;
+import com.company.ZZFunctions.ZZBFunction;
 import com.company.ZZFunctions.ZZFunction;
 import com.company.ZZFunctions.ZZTest;
 import com.company.ZZNode.ZZDoubleNode;
@@ -44,8 +45,9 @@ public class Lista<T> implements ZZList<T> {
            head=new ZZDoubleNode<>(elem);
            tail=head;
        }else{
-           ZZDoubleNode<T> temp=new ZZDoubleNode<>(elem,null,tail);
-           tail=temp;
+           tail=new ZZDoubleNode<>(elem,null,tail);
+
+           System.out.println(tail.getPrev().getElem());
        }
        size++;
        return this;
@@ -240,7 +242,7 @@ public class Lista<T> implements ZZList<T> {
 
     //tipi comparable
     @Override
-    public void sort() {
+    public void sort(ZZBFunction<Integer,T,T> confronto) {
 
     }
 
@@ -321,4 +323,6 @@ public class Lista<T> implements ZZList<T> {
         size=list.size;
         list.size=s;
     }
+
+
 }

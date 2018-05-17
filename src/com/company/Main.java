@@ -35,9 +35,13 @@ public class Main {
        // list3.addAllExcept(list2, ;
 */
     //Test.stack_test();
-        //Test.queue_test();
-        Test.fold_test();
+        /*Test.queue_test();
 
+        System.out.println("\nFine test coda\n");*/
+
+        //Test.fold_test();
+
+        Test.lista_test();
     }
 
 }

@@ -1,6 +1,7 @@
 package com.company.test;
 
 import com.company.ConcreteClass.Coda;
+import com.company.ConcreteClass.Lista;
 import com.company.ConcreteClass.Pila;
 import com.company.Interfacce.ZZCollection;
 import com.company.Interfacce.ZZIterator;
@@ -53,6 +54,7 @@ public class Test {
         }
 
         stampa_zzIterable("Inserimento effetuato", p);
+        p.forEachElement((Integer i) -> System.out.println(String.format("for each, i: %d", i)));
 
         p.removeAllExcept(e -> (e % 2) == 0);
 
@@ -108,5 +110,13 @@ public class Test {
        });
        System.out.println(String.format("Media: \n Atteso: %f \n Calcolato: %f",media, r));
 
+    }
+
+    public static void lista_test(){
+        Lista<Integer> l=new Lista<>();
+        for(int i=1;i<20;i++){
+            l.insertTail(i);
+        }
+        stampa_zzIterable("Inserimento effetuato", l);
     }
 }
