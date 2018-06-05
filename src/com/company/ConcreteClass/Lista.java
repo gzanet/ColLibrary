@@ -11,7 +11,7 @@ import com.company.ZZExceptions.ZZNotFoundException;
 import com.company.ZZFunctions.ZZFunction;
 import com.company.ZZFunctions.ZZTest;
 import com.company.ZZNode.ZZDoubleNode;
-import com.company.ZZNode.ZZSimpleNode;
+
 
 import java.util.Iterator;
 
@@ -39,7 +39,7 @@ public class Lista<T> implements ZZList<T> {
            head=new ZZDoubleNode<>(elem);
            tail=head;
        }else{
-           ZZDoubleNode<T> temp=new ZZDoubleNode<>(elem,head,null);
+           ZZDoubleNode<T> temp = new ZZDoubleNode<>(elem,head,null);
            head=temp;
        }
        size++;
@@ -88,7 +88,7 @@ public class Lista<T> implements ZZList<T> {
     }
 
     @Override
-    public ZZList<T> inserAt(int position, ZZCollection<T> col) {/*TODO brutta efficenza*/
+    public ZZList<T> insertAt(int position, ZZCollection<T> col) {/*TODO brutta efficenza*/
         ZZIterator<T> it=col.getIterator();
         while(it.hasNext()){
             insertAt(position,it.getNext());
@@ -180,7 +180,22 @@ public class Lista<T> implements ZZList<T> {
 
     @Override
     public T getAt(int position) throws ZZNotFoundException {
-        return null;
+        if(position<0 || position>=size){throw new ZZInvalidArgumentException("index out of bounds");}
+
+        else if(position < size/2){//siamo più vicini alla testa
+            ZZDoubleNode<T> temp=head;
+            for(int i=0;i<position;i++){
+                temp=temp.getNext();
+            }
+            return temp.getElem(); //NullPointerException da sistemare;
+        }
+        else{
+            ZZDoubleNode<T> temp=tail;
+            for(int i=size-1;i>position;i--){
+                temp=temp.getPrev();
+            }
+            return temp.getElem();
+        }
     }
 
     @Override
@@ -194,9 +209,7 @@ public class Lista<T> implements ZZList<T> {
     }
 
     @Override
-    public void sort() {
-
-    }
+    public void sort() {}
 
     @Override
     public int size() {
@@ -210,11 +223,16 @@ public class Lista<T> implements ZZList<T> {
 
     @Override
     public <S> ZZCollection<S> map(ZZFunction<T, S> fun) {
-        return null;
+        Lista<S> l = new Lista<>();
+
+        for(int i=0; i<size; i++) {
+            l.add( fun.apply(this.getAt(i)) );
+        }
+        return l;
     }
 
     @Override
     public ZZIterator<T> getIterator() {
-        return null;
+       return new ListaIterator<T>(this);
     }
 }

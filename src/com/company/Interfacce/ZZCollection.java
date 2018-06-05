@@ -26,7 +26,7 @@ public interface ZZCollection<T> extends ZZIterable<T> {
     }
     void removeAllExcept(ZZTest<T> tester);
 
-    void add(T e) throws ZZNoAvailableSpaceException;
+    ZZCollection<T> add(T e) throws ZZNoAvailableSpaceException;
 
     default void addAll(ZZIterable<T> collection) throws ZZNoAvailableSpaceException{
 

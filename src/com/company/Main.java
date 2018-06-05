@@ -1,11 +1,13 @@
 package com.company;
 
 import com.company.ConcreteClass.Lista;
+import com.company.Interfacce.ZZCollection;
 import com.company.ZZFunctions.ZZFunction;
 import com.company.test.Test;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.function.Function;
 
 public class Main {
 
@@ -34,8 +36,16 @@ public class Main {
         Lista<Integer> list3 = new Lista<>();
        // list3.addAllExcept(list2, ;
 */
-    //Test.stack_test();
-        Test.queue_test();
+        //Test.stack_test();
+        //Test.queue_test();
+
+        Lista<Integer> l = new Lista<>();
+        Lista<Boolean> l2;
+        l.add(1).add(2).add(3).add(4).add(5).add(5);
+        l.map( (Integer i) -> i < 3 );
+
+        l.forEachElement( (Integer i)->System.out.println(i) );
+
 
     }
 

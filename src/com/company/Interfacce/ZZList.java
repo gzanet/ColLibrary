@@ -14,10 +14,10 @@ public interface ZZList<T> extends ZZCollection<T> {
         removeHead();
         return e;
     }
-
     @Override
-    default void add(T e)throws ZZNoAvailableSpaceException {
-        insertHead(e);
+    default ZZList<T> add(T e)throws ZZNoAvailableSpaceException {
+        insertTail(e);
+        return this;
     }
 
     default ZZList<T> insertHead(T elem){
@@ -29,7 +29,7 @@ public interface ZZList<T> extends ZZCollection<T> {
         return this;
     }
     ZZList<T> insertAt(int position, T elem);
-    ZZList<T> inserAt(int position, ZZCollection<T> col);
+    ZZList<T> insertAt(int position, ZZCollection<T> col);
 
 
     default T removeHead() throws ZZEmptyContainerException{ return removeAt(0); }

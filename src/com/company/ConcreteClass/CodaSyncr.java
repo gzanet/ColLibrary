@@ -48,12 +48,12 @@ public class CodaSyncr<T> extends Coda<T> {
     public synchronized T remove() throws ZZEmptyContainerException {
         return super.remove();
     }
-
+/*
     @Override
     public synchronized void add(T e) throws ZZNoAvailableSpaceException {
         super.add(e);
     }
-
+*/
     @Override
     public synchronized void removeAll() {
         super.removeAll();

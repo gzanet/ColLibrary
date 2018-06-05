@@ -16,7 +16,8 @@ public interface ZZQueue<T> extends ZZCollection<T> {
         return dequeue();
     }
     @Override
-    default void add(T e)throws ZZNoAvailableSpaceException{
+    default ZZQueue<T> add(T e)throws ZZNoAvailableSpaceException{
         enqueue(e);
+        return this;
     }
 }

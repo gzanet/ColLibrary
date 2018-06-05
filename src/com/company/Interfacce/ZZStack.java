@@ -17,8 +17,9 @@ public interface ZZStack<T> extends ZZCollection<T> {
     }
 
     @Override
-    default void add(T e)throws ZZNoAvailableSpaceException {
+    default ZZStack<T> add(T e)throws ZZNoAvailableSpaceException {
         push(e);
+        return this;
     }
 
 }
