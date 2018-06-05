@@ -19,7 +19,7 @@ public interface ZZList<T> extends ZZCollection<T> {
 
     @Override
     default void add(T e)throws ZZNoAvailableSpaceException {
-        insertHead(e);
+        insertTail(e);
     }
 
     default ZZList<T> insertHead(T elem){
