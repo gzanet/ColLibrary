@@ -32,8 +32,7 @@ public class Lista<T> implements ZZList<T> {
            head=new ZZDoubleNode<>(elem);
            tail=head;
        }else{
-           ZZDoubleNode<T> temp=new ZZDoubleNode<>(elem,head,null);
-           head=temp;
+           head=new ZZDoubleNode<>(elem,head,null);
        }
        size++;
        return this;
@@ -47,7 +46,7 @@ public class Lista<T> implements ZZList<T> {
        }else{
            tail=new ZZDoubleNode<>(elem,null,tail);
 
-           System.out.println(tail.getPrev().getElem());
+           //System.out.println(tail.getPrev().getElem());
        }
        size++;
        return this;
@@ -66,18 +65,19 @@ public class Lista<T> implements ZZList<T> {
            for(int i=0;i<position;i++){
             temp=temp.getNext();
            }
-           //temp è il precedente
-            new ZZDoubleNode<T>(elem,temp.getNext(),temp);
+           //temp è il successivo
+           size++;
+            new ZZDoubleNode<T>(elem,temp,temp.getPrev());
        }
        else{
            ZZDoubleNode<T> temp=tail;
            for(int i=size-1;i>position;i--){
                temp=temp.getPrev();
            }
-           //temp è il successivo
-           new ZZDoubleNode<T>(elem,temp,temp.getPrev());
+           //temp è il precedente
+           size++;
+           new ZZDoubleNode<T>(elem,temp.getNext(),temp);
        }
-       size++;
        return this;
     }
 
@@ -123,7 +123,7 @@ public class Lista<T> implements ZZList<T> {
             throw new ZZEmptyContainerException("vuota");
         }
         else if(size==1){
-            ZZDoubleNode<T> temp=head;
+            ZZDoubleNode<T> temp=tail;
             size--;
             head=null;
             tail=null;
@@ -240,9 +240,35 @@ public class Lista<T> implements ZZList<T> {
         return trovato?position+1:-1;
     }
 
-    //tipi comparable
+    public void setAt(int p, T elem) throws ZZInvalidArgumentException{
+       /*poco efficiente*/
+       if(p<0 || p>=size){
+           throw new ZZInvalidArgumentException("indice non coretto");
+       }
+       int i=0;
+       ZZDoubleNode<T> temp=head;
+       while(i<p){
+           i++;
+           temp=temp.getNext();
+       }
+       temp.setElem(elem);
+
+    }
+
     @Override
     public void sort(ZZBFunction<Integer,T,T> confronto) {
+       /*TODO brutto insertion sort molto poco efficeinte*/
+       int i;
+       T key;
+       for(int j=1;j<size;j++){
+           key=getAt(j);
+           i=j-1;
+           while(i>-1 && confronto.apply(getAt(i),key)>0){
+               setAt(i+1,getAt(i));
+               i--;
+           }
+           setAt(i+1,key);
+       }
 
     }
 

@@ -12,6 +12,7 @@ public class ZZDoubleNode<T>{
 
     public ZZDoubleNode(T elem, ZZDoubleNode next, ZZDoubleNode prev) {
         this.elem = elem;
+
         setNext(next);
         setPrev(prev);
     }
@@ -38,16 +39,8 @@ public class ZZDoubleNode<T>{
             setPrev();
         }
         else{
-            ZZDoubleNode<T> temp=this.prev;
-            x.sconcatena();
-
-            x.next = this;
-            this.prev=x;
-
-            if(temp!=null) {
-                temp.next = x;
-            }
-            x.prev=temp;
+            prev=x;
+            x.next=this;
         }
     }
 
@@ -64,16 +57,8 @@ public class ZZDoubleNode<T>{
             setNext();
         }
         else{
-            ZZDoubleNode<T> temp=this.next;
-            x.sconcatena();
-
-            x.prev = this;
-            this.next=x;
-
-            if(temp!=null) {
-                temp.prev = x;
-            }
-            x.next=temp;
+            next=x;
+            x.prev=this;
         }
     }
 

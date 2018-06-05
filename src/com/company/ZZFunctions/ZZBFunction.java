@@ -1,5 +1,5 @@
 package com.company.ZZFunctions;
 
-public interface ZZBFunction<T,S,Z> {
+public interface ZZBFunction<S,T,Z> {
     S apply(T t,Z z);
 }

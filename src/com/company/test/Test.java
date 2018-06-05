@@ -5,6 +5,7 @@ import com.company.ConcreteClass.Lista;
 import com.company.ConcreteClass.Pila;
 import com.company.Interfacce.ZZCollection;
 import com.company.Interfacce.ZZIterator;
+import com.company.ZZFunctions.ZZBFunction;
 import com.company.ZZFunctions.ZZFold;
 
 
@@ -12,13 +13,16 @@ public class Test {
 
    private  static <T> void stampa_zzIterable(String str, ZZCollection<T> p){
         System.out.println(str);
-        System.out.println("Size: " + p.size());
+        int i=0;
         ZZIterator<T> it = p.getIterator();
         while(it.hasNext()){
             System.out.print(it.getNext() + " ");
+            i++;
         }
 
        System.out.println();
+       System.out.println("Size: " + p.size()+ " -- i: " + i);
+
     }
     public static void stack_test(){
         Pila<Integer> p=new Pila<>();
@@ -115,8 +119,18 @@ public class Test {
     public static void lista_test(){
         Lista<Integer> l=new Lista<>();
         for(int i=1;i<20;i++){
-            l.insertTail(i);
+            l.insertHead(i);
         }
+        l.insertAt(2,100);
+        l.insertAt(l.size()-2, 200);
         stampa_zzIterable("Inserimento effetuato", l);
+
+        l.sort(new ZZBFunction<Integer, Integer, Integer>() {
+            @Override
+            public Integer apply(Integer i, Integer j) {
+                return i-j;
+            }
+        });
+        stampa_zzIterable("Ordinamento fatto",l);
     }
 }
