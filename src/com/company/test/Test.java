@@ -5,8 +5,10 @@ import com.company.ConcreteClass.Lista;
 import com.company.ConcreteClass.Pila;
 import com.company.Interfacce.ZZCollection;
 import com.company.Interfacce.ZZIterator;
+import com.company.Interfacce.ZZList;
 import com.company.ZZFunctions.ZZBFunction;
 import com.company.ZZFunctions.ZZFold;
+import com.company.ZZFunctions.ZZTest;
 
 
 public class Test {
@@ -118,11 +120,16 @@ public class Test {
 
     public static void lista_test(){
         Lista<Integer> l=new Lista<>();
+        l.sort(new ZZBFunction<Integer, Integer, Integer>() {
+            @Override
+            public Integer apply(Integer integer, Integer integer2) {
+                return 0;
+            }
+        });
         for(int i=1;i<20;i++){
             l.insertHead(i);
         }
-        l.insertAt(2,100);
-        l.insertAt(l.size()-2, 200);
+        l.insertAt(2,100).insertAt(l.size()-2, 200).insertHead(-20).insertTail(-40);
         stampa_zzIterable("Inserimento effetuato", l);
 
         l.sort(new ZZBFunction<Integer, Integer, Integer>() {
@@ -132,5 +139,24 @@ public class Test {
             }
         });
         stampa_zzIterable("Ordinamento fatto",l);
+
+        l.removeAllExcept(new ZZTest<Integer>() {
+            @Override
+            public boolean test(Integer e) {
+                return e%2==0;
+            }
+        });
+
+        stampa_zzIterable("Rimozione dispari",l);
+
+        ZZList<Integer> l2=l.removeFrom(3);
+        stampa_zzIterable("divisione from",l);
+        stampa_zzIterable("divisione from",l2);
+
+        ZZList<Integer> l3=l2.removeUntil(3);
+        stampa_zzIterable("divisione until",l2);
+        stampa_zzIterable("divisione until",l3);
+
+
     }
 }

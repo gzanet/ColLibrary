@@ -135,13 +135,28 @@ public class Lista<T> implements ZZList<T> {
     }
 
     //fare senza ricreazione nodi
+    //position compresa
     @Override
     public ZZList<T> removeFrom(int position) throws ZZInvalidArgumentException {
+
         checkPosition(position);
         Lista<T> temp = new Lista<T>();
-        while (position < size) {
-            temp.insertHead(removeTail());
+        if(position==0){
+            swap(temp);
         }
+        else {
+            temp.head = getNode(position);
+            temp.tail = tail;
+            temp.size = size - position;
+
+            tail = temp.head.getPrev();
+            tail.setNext();
+            size = position;
+        }
+
+        /*while (position < size) {
+            temp.insertHead(removeTail());
+        }*/
         return temp;
     }
 
@@ -201,17 +216,18 @@ public class Lista<T> implements ZZList<T> {
 
     @Override
     public void sort(ZZBFunction<Integer, T, T> confronto) {
-        /*TODO brutto insertion sort molto poco efficeinte*/
-        int i;
+        /*Insertion sort*/
         T key;
-        for (int j = 1; j < size; j++) {
-            key = getAt(j);
-            i = j - 1;
-            while (i > -1 && confronto.apply(getAt(i), key) > 0) {
-                setAt(i + 1, getAt(i));
-                i--;
+        ZZDoubleNode<T> prev=head;
+        ZZDoubleNode<T> i=size==0?null:head.getNext();
+        while(i!=null){
+            key = i.getElem();
+            prev=i.getPrev();
+            while (prev!=null && confronto.apply(prev.getElem(), key) > 0) {
+                prev.swap(prev.getNext());
+                prev=prev.getPrev();
             }
-            setAt(i + 1, key);
+            i=i.getNext();
         }
 
     }
@@ -238,6 +254,7 @@ public class Lista<T> implements ZZList<T> {
             if (!tester.test(temp.getElem())) {
                 temp = temp.getNext();
                 temp.getPrev().sconcatena();
+                size--;
             } else {
                 temp = temp.getNext();
             }
@@ -317,7 +334,8 @@ public class Lista<T> implements ZZList<T> {
         }
     }
 
-    private ZZDoubleNode<T> getNode(int position) {
+    private ZZDoubleNode<T> getNode(int position) throws ZZInvalidArgumentException{
+        checkPosition(position);
         ZZDoubleNode<T> temp;
         if (position < size / 2) {//siamo più vicini alla testa
             temp = head;
