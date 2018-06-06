@@ -45,6 +45,7 @@ public interface ZZList<T> extends ZZCollection<T> {
     default T getHead() throws ZZNotFoundException { return getAt(0); };
     default T gettail() throws ZZNotFoundException { return getAt(size()-1); };
 
+    void setAt(int position, T elem);
 
     int indexOf(T elem);
     int lastIndeOf(T elem);

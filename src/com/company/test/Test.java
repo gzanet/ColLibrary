@@ -157,6 +157,12 @@ public class Test {
         stampa_zzIterable("divisione until",l2);
         stampa_zzIterable("divisione until",l3);
 
+        l3.sort(new ZZBFunction<Integer, Integer, Integer>() {
+            @Override
+            public Integer apply(Integer i, Integer j) {
+                return i.compareTo(j);
+            }
+        });
 
     }
 }

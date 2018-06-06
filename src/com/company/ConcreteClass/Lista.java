@@ -76,7 +76,7 @@ public class Lista<T> implements ZZList<T> {
             position++;
         }
         coda = position == size - 1;//sto inserendo in coda
-        ZZDoubleNode<T> temp = getNode(position - 1);
+        ZZDoubleNode<T> temp = getNode(position);//controllare
         while (it.hasNext()) {
             temp = new ZZDoubleNode<T>(it.getNext(), temp.getNext(), temp);
             size++;
@@ -208,6 +208,7 @@ public class Lista<T> implements ZZList<T> {
         return trovato ? position + 1 : -1;
     }
 
+    @Override
     public void setAt(int p, T elem) throws ZZInvalidArgumentException {
         checkPosition(p);
         getNode(p).setElem(elem);
@@ -317,7 +318,7 @@ public class Lista<T> implements ZZList<T> {
         size = 0;
         head = null;
         tail = null;
-        return temp.getElem();
+        return temp.getElem()==null?null:temp.getElem();
     }
 
     private void checkPosition(int p) throws ZZInvalidArgumentException {
