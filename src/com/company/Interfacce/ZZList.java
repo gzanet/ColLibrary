@@ -43,7 +43,7 @@ public interface ZZList<T> extends ZZCollection<T> {
 
     T getAt(int position) throws ZZNotFoundException;
     default T getHead() throws ZZNotFoundException { return getAt(0); };
-    default T gettail() throws ZZNotFoundException { return getAt(size()-1); };
+    default T getTail() throws ZZNotFoundException { return getAt(size()-1); };
 
     void setAt(int position, T elem);
 
@@ -55,5 +55,5 @@ public interface ZZList<T> extends ZZCollection<T> {
 
     void sort(ZZBFunction<Integer,T,T> confronto);
 
-    <S> ZZCollection<S> map(ZZFunction<T, S> fun);
+    <S> ZZList<S> map(ZZFunction<T, S> fun);
 }

@@ -76,7 +76,7 @@ public class Lista<T> implements ZZList<T> {
             position++;
         }
         coda = position == size - 1;//sto inserendo in coda
-        ZZDoubleNode<T> temp = getNode(position);//controllare
+        ZZDoubleNode<T> temp = getNode(position-1);//controllare
         while (it.hasNext()) {
             temp = new ZZDoubleNode<T>(it.getNext(), temp.getNext(), temp);
             size++;
@@ -267,7 +267,7 @@ public class Lista<T> implements ZZList<T> {
     }
 
     @Override
-    public <S> ZZCollection<S> map(ZZFunction<T, S> fun) {
+    public <S> Lista<S> map(ZZFunction<T, S> fun) {
         Lista<S> ris = new Lista<S>();
         ZZDoubleNode<T> temp = head;
         for (int i = 0; i < size; i++) {
@@ -318,7 +318,7 @@ public class Lista<T> implements ZZList<T> {
         size = 0;
         head = null;
         tail = null;
-        return temp.getElem()==null?null:temp.getElem();
+        return temp==null?null:temp.getElem();
     }
 
     private void checkPosition(int p) throws ZZInvalidArgumentException {

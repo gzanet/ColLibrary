@@ -14,7 +14,7 @@ import com.company.ZZNode.ZZSimpleNode;
 public class Coda<T> implements ZZQueue<T> {
 
 
-    private static String ErrorEmptyContainer ="Errore: la coda è vuota";
+    private static final String ErrorEmptyContainer ="Errore: la coda è vuota";
     private int size;
     private ZZSimpleNode<T> head;
     private ZZSimpleNode<T> tail;
@@ -47,7 +47,7 @@ public class Coda<T> implements ZZQueue<T> {
 
     @Override
     public T dequeue() throws ZZEmptyContainerException {
-        if(size==0){throw new ZZEmptyContainerException(ErrorEmptyContainer);}
+        checkEmpty();
         T elem=head.getElem();
         if(size==1){
             head=null;
@@ -63,7 +63,7 @@ public class Coda<T> implements ZZQueue<T> {
 
     @Override
     public T first() throws ZZEmptyContainerException {
-        if(size==0){throw new ZZEmptyContainerException(ErrorEmptyContainer);}
+        checkEmpty();
         return head.getElem();
     }
 
@@ -115,5 +115,9 @@ public class Coda<T> implements ZZQueue<T> {
                 return ris;
             }
         };
+    }
+
+    private void checkEmpty(){
+        if(size==0){throw new ZZEmptyContainerException(ErrorEmptyContainer);}
     }
 }

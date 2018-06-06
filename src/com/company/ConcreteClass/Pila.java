@@ -81,7 +81,7 @@ public class Pila<T> implements ZZStack<T> {
 
     @Override
     public T pop() throws ZZEmptyContainerException {
-        if(size==0){throw new ZZEmptyContainerException(ErrorEmptyContainer);}
+        checkEmpty();
         T ris=head.getElem();
         head=head.getNext();
         size--;
@@ -90,7 +90,11 @@ public class Pila<T> implements ZZStack<T> {
 
     @Override
     public T top() throws ZZEmptyContainerException {
-        if(size==0){throw new ZZEmptyContainerException(ErrorEmptyContainer);}
+        checkEmpty();
         return head.getElem();
+    }
+
+    private void checkEmpty(){
+        if(size==0){throw new ZZEmptyContainerException(ErrorEmptyContainer);}
     }
 }
