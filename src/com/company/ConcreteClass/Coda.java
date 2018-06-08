@@ -89,7 +89,7 @@ public class Coda<T> implements ZZQueue<T> {
     }
 
     @Override
-    public <S> ZZCollection<S> map(ZZFunction<T,S> fun) {
+    public <S> Coda<S> map(ZZFunction<T,S> fun) {
         Coda<S> temp=new Coda<>();
         ZZIterator<T> it=getIterator();
         while(it.hasNext()){

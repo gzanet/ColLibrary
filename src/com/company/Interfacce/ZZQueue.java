@@ -2,6 +2,7 @@ package com.company.Interfacce;
 
 import com.company.ZZExceptions.ZZEmptyContainerException;
 import com.company.ZZExceptions.ZZNoAvailableSpaceException;
+import com.company.ZZFunctions.ZZFunction;
 
 public interface ZZQueue<T> extends ZZCollection<T> {
 
@@ -19,4 +20,7 @@ public interface ZZQueue<T> extends ZZCollection<T> {
     default void add(T e)throws ZZNoAvailableSpaceException{
         enqueue(e);
     }
+
+    @Override
+    <S> ZZQueue<S> map(ZZFunction<T,S> fun);
 }

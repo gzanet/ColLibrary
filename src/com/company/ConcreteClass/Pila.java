@@ -45,7 +45,7 @@ public class Pila<T> implements ZZStack<T> {
     }
 
     @Override
-    public <S> ZZCollection<S> map(ZZFunction<T, S> fun) {
+    public <S> Pila<S> map(ZZFunction<T, S> fun) {
         Pila<S> temp=new Pila<>();
         ZZIterator<T> it=getIterator();
         while(it.hasNext()){
