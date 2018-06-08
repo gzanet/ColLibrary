@@ -4,6 +4,7 @@ import com.company.Interfacce.ZZQueue;
 import com.company.Interfacce.ZZStack;
 import com.company.ZZExceptions.ZZEmptyContainerException;
 import com.company.ZZExceptions.ZZNoAvailableSpaceException;
+import com.company.ZZFunctions.ZZFunction;
 
 public class SuperLista<T> extends Lista<T> implements ZZQueue<T>, ZZStack<T> {
     @Override
@@ -44,6 +45,11 @@ public class SuperLista<T> extends Lista<T> implements ZZQueue<T>, ZZStack<T> {
     @Override
     public T top() throws ZZEmptyContainerException {
         return getHead();
+    }
+
+    @Override
+    public <S> SuperLista<S> map(ZZFunction<T,S> fun){
+        return null;
     }
 
 }
