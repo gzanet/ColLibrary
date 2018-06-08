@@ -147,7 +147,7 @@ public class PriorityQueue<T> implements ZZPriorityQueue<T> {
             public Double apply(S e) {
                 return 0.0;
             }
-        })
+        });
     }    
 
     @Override

@@ -1,12 +1,15 @@
 package com.company.ConcreteClass;
 
+import com.company.Interfacce.ZZPriorityQueue;
 import com.company.Interfacce.ZZQueue;
 import com.company.Interfacce.ZZStack;
 import com.company.ZZExceptions.ZZEmptyContainerException;
 import com.company.ZZExceptions.ZZNoAvailableSpaceException;
+import com.company.ZZFunctions.ZZFold;
 import com.company.ZZFunctions.ZZFunction;
 
 public class SuperLista<T> extends Lista<T> implements ZZQueue<T>, ZZStack<T> {
+
     @Override
     public T remove(){
         return removeHead();
