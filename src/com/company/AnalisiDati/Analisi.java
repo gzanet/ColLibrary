@@ -11,7 +11,7 @@ import java.io.FileReader;
 import java.io.IOException;
 import java.util.Random;
 
-public class Analisi_main {
+public class Analisi {
 
     public static void sort(ZZList<Double> list) {
         list.sort(new ZZBFunction<Integer, Double, Double>() {

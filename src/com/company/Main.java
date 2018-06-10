@@ -1,12 +1,6 @@
 package com.company;
 
-import com.company.AnalisiDati.Analisi_main;
-import com.company.ConcreteClass.Lista;
-import com.company.ZZFunctions.ZZFunction;
-import com.company.test.Test;
-
-import java.util.ArrayList;
-import java.util.List;
+import com.company.AnalisiDati.Analisi;
 
 public class Main {
 
@@ -43,7 +37,7 @@ public class Main {
         //Test.fold_test();
 
         //Test.lista_test();
-        Analisi_main.main(null);
+        Analisi.main(null);
     }
 
 }
