@@ -4,7 +4,11 @@ import com.company.ZZExceptions.ZZEmptyContainerException;
 
 public interface ZZIterator<T> {
 
-    boolean hasNext();
+    default boolean hasNext(){
+        return false;
+    }
 
-    T getNext() throws ZZEmptyContainerException;
+    default T getNext() throws ZZEmptyContainerException{
+        return null;
+    }
 }

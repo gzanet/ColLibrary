@@ -46,20 +46,9 @@ public class ZZSimpleNode<T> implements ZZIterable {
     }
 
     public static <T> ZZIterator<T> getIterator(ZZSimpleNode<T> node){
-        if(node==null){
-            return new ZZIterator<T>() {
-                @Override
-                public boolean hasNext() {
-                    return false;
-                }
-
-                @Override
-                public T getNext() throws ZZEmptyContainerException {
-                    return null;
-                }
-            };
-        }
-        else {
+        if(node==null) {
+            return new ZZIterator<T>(){};
+        } else {
             return node.getIterator();
         }
     }

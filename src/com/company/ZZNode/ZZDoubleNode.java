@@ -112,17 +112,7 @@ public class ZZDoubleNode<T> implements ZZIterable<T> {
 
     public static <T> ZZIterator<T> getIterator(ZZDoubleNode<T> node){
         if(node==null){
-            return new ZZIterator<T>() {
-                @Override
-                public boolean hasNext() {
-                    return false;
-                }
-
-                @Override
-                public T getNext() throws ZZEmptyContainerException {
-                    return null;
-                }
-            };
+            return new ZZIterator<T>() {};
         }
         else {
             return node.getIterator();
