@@ -279,24 +279,7 @@ public class Lista<T> implements ZZList<T> {
 
     @Override
     public ZZIterator<T> getIterator() {
-        return new ZZIterator<T>() {
-            ZZDoubleNode<T> temp = head;
-
-            @Override
-            public boolean hasNext() {
-                return temp != null;
-            }
-
-            @Override
-            public T getNext() throws ZZEmptyContainerException {
-                if (temp == null) {
-                    throw new ZZEmptyContainerException("vuoto");
-                }
-                T elem = temp.getElem();
-                temp = temp.getNext();
-                return elem;
-            }
-        };
+        return ZZDoubleNode.getIterator(head);
     }
 
     private void swap(Lista<T> list) {

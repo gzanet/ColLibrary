@@ -56,21 +56,7 @@ public class Pila<T> implements ZZStack<T> {
 
     @Override
     public ZZIterator<T> getIterator() {
-        return new ZZIterator<T>() {
-            ZZSimpleNode<T> p=head;
-            @Override
-            public boolean hasNext() {
-                return p!=null;
-            }
-
-            @Override
-            public T getNext() throws ZZEmptyContainerException {
-                if(p==null){throw new ZZEmptyContainerException(ErrorEmptyContainer);}
-                T ris=p.getElem();
-                p=p.getNext();
-                return ris;
-            }
-        };
+        return ZZSimpleNode.getIterator(head);
     }
 
     @Override

@@ -1,6 +1,7 @@
 package com.company;
 
 import com.company.AnalisiDati.Analisi;
+import com.company.test.Test;
 
 public class Main {
 
@@ -38,6 +39,8 @@ public class Main {
 
         //Test.lista_test();
         Analisi.main(null);
+
+        Test.queue_test();
     }
 
 }

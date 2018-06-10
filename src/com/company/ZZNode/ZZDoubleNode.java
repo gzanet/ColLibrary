@@ -1,6 +1,10 @@
 package com.company.ZZNode;
 
-public class ZZDoubleNode<T>{
+import com.company.Interfacce.ZZIterable;
+import com.company.Interfacce.ZZIterator;
+import com.company.ZZExceptions.ZZEmptyContainerException;
+
+public class ZZDoubleNode<T> implements ZZIterable<T> {
     private ZZDoubleNode<T> prev;
     private ZZDoubleNode<T> next;
     private T elem;
@@ -83,5 +87,45 @@ public class ZZDoubleNode<T>{
         T temp=node.elem;
         node.elem=elem;
         elem=temp;
+    }
+
+
+    @Override
+    public ZZIterator<T> getIterator() {
+        ZZDoubleNode<T> t=this;
+        return new ZZIterator<T>() {
+            ZZDoubleNode<T> p=t;
+            @Override
+            public boolean hasNext() {
+                return p!=null;
+            }
+
+            @Override
+            public T getNext() throws ZZEmptyContainerException {
+                if(p==null){throw new ZZEmptyContainerException("Errore: container vuoto");}
+                T ris=p.getElem();
+                p=p.getNext();
+                return ris;
+            }
+        };
+    }
+
+    public static <T> ZZIterator<T> getIterator(ZZDoubleNode<T> node){
+        if(node==null){
+            return new ZZIterator<T>() {
+                @Override
+                public boolean hasNext() {
+                    return false;
+                }
+
+                @Override
+                public T getNext() throws ZZEmptyContainerException {
+                    return null;
+                }
+            };
+        }
+        else {
+            return node.getIterator();
+        }
     }
 }
