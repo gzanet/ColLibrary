@@ -2,7 +2,7 @@ package com.company.AnalisiDati;
 
 import com.company.ConcreteClass.Lista;
 import com.company.Interfacce.ZZList;
-import com.company.ZZFunctions.ZZBFunction;
+import com.company.ZZFunctions.ZZBiFunction;
 import com.company.ZZFunctions.ZZFold;
 import com.company.ZZFunctions.ZZFunction;
 
@@ -14,7 +14,7 @@ import java.util.Random;
 public class Analisi {
 
     public static void sort(ZZList<Double> list) {
-        list.sort(new ZZBFunction<Integer, Double, Double>() {
+        list.sort(new ZZBiFunction<Integer, Double, Double>() {
             @Override
             public Integer apply(Double t1, Double t2) {
                 return t1.compareTo(t2);

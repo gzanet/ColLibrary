@@ -1,10 +1,9 @@
 package com.company.Interfacce;
 
 import com.company.ZZExceptions.ZZEmptyContainerException;
-import com.company.ZZExceptions.ZZInvalidArgumentException;
 import com.company.ZZExceptions.ZZNoAvailableSpaceException;
 import com.company.ZZExceptions.ZZNotFoundException;
-import com.company.ZZFunctions.ZZBFunction;
+import com.company.ZZFunctions.ZZBiFunction;
 import com.company.ZZFunctions.ZZFunction;
 
 //inserimento può lanciare eccezione
@@ -53,7 +52,7 @@ public interface ZZList<T> extends ZZCollection<T> {
         return indexOf(elem)!=-1;
     }
 
-    void sort(ZZBFunction<Integer,T,T> confronto);
+    void sort(ZZBiFunction<Integer,T,T> confronto);
 
     <S> ZZList<S> map(ZZFunction<T, S> fun);
 }

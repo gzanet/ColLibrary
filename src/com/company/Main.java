@@ -7,10 +7,10 @@ public class Main {
 
     public static void main(String[] args) {
         // write your code here
-        System.out.println("sfigato");
 
         //ESEMPIO 1
-        /*ZZFunction<Integer,Integer> addTwo = i -> i+2;
+        /*
+        ZZFunction<Integer,Integer> addTwo = i -> i+2;
         List<Integer> l = new ArrayList<>();
         l.add(1);
         l.add(2);
@@ -28,12 +28,12 @@ public class Main {
 
         Lista<Integer> list2 = new Lista<>(list);
         Lista<Integer> list3 = new Lista<>();
-       // list3.addAllExcept(list2, ;
-*/
-    Test.stack_test();
-        /*Test.queue_test();
+       //list3.addAllExcept(list2, ;
 
-        System.out.println("\nFine test coda\n");*/
+        Test.stack_test();
+        Test.queue_test();
+
+        System.out.println("\nFine test coda\n");
 
         Test.fold_test();
 
@@ -41,7 +41,8 @@ public class Main {
         Analisi.main(null);
 
         Test.queue_test();
+        */
+        //Test.test_HashTable();
+        Test.test_PriorityQueue();
     }
-
 }
-

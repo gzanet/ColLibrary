@@ -3,8 +3,7 @@ package com.company.ConcreteClass;
 import com.company.Interfacce.*;
 import com.company.ZZExceptions.ZZEmptyContainerException;
 import com.company.ZZExceptions.ZZInvalidArgumentException;
-import com.company.ZZExceptions.ZZNotFoundException;
-import com.company.ZZFunctions.ZZBFunction;
+import com.company.ZZFunctions.ZZBiFunction;
 import com.company.ZZFunctions.ZZFunction;
 import com.company.ZZFunctions.ZZTest;
 import com.company.ZZNode.ZZDoubleNode;
@@ -216,7 +215,7 @@ public class Lista<T> implements ZZList<T> {
     }
 
     @Override
-    public void sort(ZZBFunction<Integer, T, T> confronto) {
+    public void sort(ZZBiFunction<Integer, T, T> confronto) {
         /*Insertion sort*/
         T key;
         ZZDoubleNode<T> prev=head;

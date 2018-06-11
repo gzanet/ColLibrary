@@ -3,7 +3,7 @@ package com.company.ConcreteClass;
 import com.company.Interfacce.*;
 import com.company.ZZExceptions.ZZInvalidArgumentException;
 import com.company.ZZExceptions.ZZNoAvailableSpaceException;
-import com.company.ZZFunctions.ZZBFunction;
+import com.company.ZZFunctions.ZZBiFunction;
 import com.company.ZZFunctions.ZZFold;
 import com.company.ZZFunctions.ZZFunction;
 import com.company.ZZFunctions.ZZTest;
@@ -114,10 +114,9 @@ public class PriorityQueue<T> implements ZZPriorityQueue<T> {
     }
 
     @Override
-    public void add(T e) throws ZZNoAvailableSpaceException { //TODO: sistamre codice vedi asd
+    public void add(T e) throws ZZNoAvailableSpaceException {
         heap.insertTail(new PriorityNode<>(e, priorityFun));
-        swap(0, heap.size()-1);
-        maxHeapify(0);
+        increaseKey(size()-1, priorityFun.apply(e));
     }
 
     public PriorityQueue<T> increaseKey(int i, double value){ 
@@ -158,7 +157,7 @@ public class PriorityQueue<T> implements ZZPriorityQueue<T> {
                 return e.getElem();
             }
         });
-        ris.sort(new ZZBFunction<Integer, T, T>() {
+        ris.sort(new ZZBiFunction<Integer, T, T>() {
             @Override
             public Integer apply(T t, T t2) {
                 return priorityFun.apply(t).compareTo(priorityFun.apply(t2));
